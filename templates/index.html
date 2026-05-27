@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>NEXUS PRIME</title>
+
+<meta http-equiv="refresh" content="300">
+
+<style>
+
+body{
+    background:#0f172a;
+    font-family:Arial;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    color:#38bdf8;
+    font-size:50px;
+}
+.topbar{
+    display:flex;
+    gap:15px;
+    justify-content:center;
+    margin-bottom:30px;
+}
+
+.topbar button{
+    background:#38bdf8;
+    border:none;
+    padding:12px 25px;
+    border-radius:10px;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.card{
+    background:#1e293b;
+    padding:20px;
+    color:white;
+    border-radius:20px;
+    box-shadow:0px 0px 10px rgba(0,0,0,0.1);
+}
+
+.buy{
+    color:green;
+    font-size:40px;
+}
+
+.sell{
+    color:red;
+    font-size:40px;
+}
+
+.wait{
+    color:gray;
+    font-size:40px;
+}
+
+</style>
+
+</head>
+<div class="card" style="margin-top:30px;">
+
+<h2>Signal Performance</h2>
+
+<canvas id="performanceChart"></canvas>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const ctx = document.getElementById('performanceChart');
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+        datasets: [{
+            label: 'Win Rate',
+            data: [60, 65, 58, 70, 75, 72, 80],
+            borderWidth: 3
+        }]
+    },
+    options: {
+        responsive: true
+    }
+});
+
+</script>
+<body>
+
+<h1>NEXUS AI</h1>
+
+<div class="topbar">
+
+<button>FOREX</button>
+<button>CRYPTO</button>
+<button>INDICES</button>
+<button>GOLD</button>
+
+</div>
+<div class="card">
+
+<h2>System Status</h2>
+
+<p>Bot Status: <span style="color:lime;">ONLINE</span></p>
+
+<p>Markets Active: {{ signals|length }}</p>
+
+<p>Refresh Time: 5 Minutes</p>
+
+<p>AI Scanner: ACTIVE</p>
+
+</div>
+
+<br>
+<div class="grid">
+
+{% for s in signals %}
+
+<div class="card">
+
+<h2>{{ s.market }}</h2>
+
+{% if s.signal == "BUY" %}
+<h1 class="buy">BUY</h1>
+
+{% elif s.signal == "SELL" %}
+<h1 class="sell">SELL</h1>
+
+{% else %}
+<h1 class="wait">WAIT</h1>
+
+{% endif %}
+
+<p><strong>Entry:</strong> {{ s.entry }}</p>
+
+<p><strong>Stop Loss:</strong> {{ s.stop_loss }}</p>
+
+<p><strong>Take Profit:</strong> {{ s.take_profit }}</p>
+
+<p><strong>Confidence:</strong> {{ s.confidence }}%</p>
+
+<p><strong>RSI:</strong> {{ s.rsi }}</p>
+
+<p><strong>Time:</strong> {{ s.time }}</p>
+{% if s.signal == "BUY" %}
+
+<p style="color:lime;">
+Strong Bullish Momentum Detected
+</p>
+
+{% elif s.signal == "SELL" %}
+
+<p style="color:red;">
+Strong Bearish Momentum Detected
+</p>
+
+{% else %}
+
+<p style="color:gray;">
+Market Waiting Zone
+</p>
+
+{% endif %}
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+
+</html>
