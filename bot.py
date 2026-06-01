@@ -85,7 +85,7 @@ def home():
             "market": market_name,
             "signal": signal,
             "color": color,
-            "entry": round(latest_price, 2),
+            "entry": f"{round(latest_price - 2, 2)} - {round(latestr_price + 2, 2)}",
             "stop_loss": round(latest_price - 10, 2),
             "take_profit": round(latest_price + 20, 2),
             "confidence": confidence,
