@@ -86,8 +86,8 @@ def home():
             "signal": signal,
             "color": color,
             "entry": round(latest_price, 5),
-            "stop_loss": round(latest_price - 10, 2),
-            "take_profit": round(latest_price + 20, 2),
+            "stop_loss": round(latest_price *0.995, 5),
+            "take_profit": round(latest_price *1.01, 5),
             "confidence": confidence,
             "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "rsi" : round(latest_rsi, 2)
