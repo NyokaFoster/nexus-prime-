@@ -45,6 +45,7 @@ def home():
 
         latest_rsi = rsi.iloc[-1]
         latest_price = close_prices.iloc[-1]
+        print("Latest Price:", latest_price)
 
         short_ma = close_prices.rolling(window=5).mean()
         long_ma = close_prices.rolling(window=20).mean()
