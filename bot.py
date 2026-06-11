@@ -24,9 +24,11 @@ def home():
 
         asset = yf.Ticker(ticker_symbol)
 
-        data = asset.history(period="1mo", interval="2s")
+        data = asset.history(period="1d", interval="1m")
         print(data.tail())
         print("Ticker:", ticker_symbol)
+        if data.empty:
+            continue
         print("Latest Close:", data["Close"].iloc[-1])
 
         close_prices = data["Close"]
