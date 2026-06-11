@@ -24,7 +24,7 @@ def home():
 
         asset = yf.Ticker(ticker_symbol)
 
-        data = asset.history(period="1mo", interval="5m")
+        data = asset.history(period="1mo", interval="2s")
         print(data.tail())
         print("Ticker:", ticker_symbol)
         print("Latest Close:", data["Close"].iloc[-1])
